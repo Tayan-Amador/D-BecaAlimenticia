@@ -10,7 +10,7 @@
         <h1 class="text-3xl font-bold text-center pb-4">Beca Alimenticia</h1>
         <nav class="mt-5 space-y-4">
             <!-- Inicio -->
-            <a href="dashboard"
+            <a href="{{ route('dashboard') }}"
                 class="flex items-center px-4 py-2.5 text-sm font-medium rounded-lg bg-orange-800 text-white hover:bg-orange-700">
                 🏠 Inicio
             </a>
@@ -29,12 +29,14 @@
                     </svg>
                 </button>
                 <div class="hidden space-y-1 pl-11" id="alumnos-dropdown">
-                    <a href="#"
-                        class="block px-4 py-2 text-sm text-orange-300 rounded-md hover:bg-orange-700">Registrar
-                        Alumno</a>
-                    <a href="#"
-                        class="block px-4 py-2 text-sm text-orange-300 rounded-md hover:bg-orange-700">Listado de
-                        Alumnos</a>
+                    <a href="{{ route('registrar.alumno') }}"
+                        class="block px-4 py-2 text-sm text-orange-300 rounded-md hover:bg-orange-700">
+                        Registrar Alumno
+                    </a>
+                    <a href="{{ route('listado.alumnos') }}"
+                        class="block px-4 py-2 text-sm text-orange-300 rounded-md hover:bg-orange-700">
+                        Listado de Alumnos
+                    </a>
                 </div>
             </div>
 
@@ -52,17 +54,19 @@
                     </svg>
                 </button>
                 <div class="hidden space-y-1 pl-11" id="huellas-dropdown">
-                    <a href="#"
-                        class="block px-4 py-2 text-sm text-orange-300 rounded-md hover:bg-orange-700">Registro de
-                        Huella</a>
-                    <a href="#"
-                        class="block px-4 py-2 text-sm text-orange-300 rounded-md hover:bg-orange-700">Alumnos sin
-                        Huella</a>
+                    <a href="{{ route('registrar.huella') }}"
+                        class="block px-4 py-2 text-sm text-orange-300 rounded-md hover:bg-orange-700">
+                        Registro de Huella
+                    </a>
+                    <a href="{{ route('listado.sin_huella') }}"
+                        class="block px-4 py-2 text-sm text-orange-300 rounded-md hover:bg-orange-700">
+                        Alumnos sin Huella
+                    </a>
                 </div>
             </div>
 
             <!-- Registro de Comidas -->
-            <a href="#"
+            <a href="{{ route('registrar.comida') }}"
                 class="flex items-center px-4 py-2.5 text-sm font-medium rounded-lg text-orange-300 hover:bg-orange-700">
                 🍽️ Registro de Comida
             </a>
@@ -81,12 +85,14 @@
                     </svg>
                 </button>
                 <div class="hidden space-y-1 pl-11" id="reportes-dropdown">
-                    <a href="#"
-                        class="block px-4 py-2 text-sm text-orange-300 rounded-md hover:bg-orange-700">Reporte de
-                        Alumnos</a>
-                    <a href="#"
-                        class="block px-4 py-2 text-sm text-orange-300 rounded-md hover:bg-orange-700">Comidas
-                        Entregadas</a>
+                    <a href="{{ route('reportes.alumnos') }}"
+                        class="block px-4 py-2 text-sm text-orange-300 rounded-md hover:bg-orange-700">
+                        Reporte de Alumnos
+                    </a>
+                    <a href="{{ route('reportes.comidas') }}"
+                        class="block px-4 py-2 text-sm text-orange-300 rounded-md hover:bg-orange-700">
+                        Comidas Entregadas
+                    </a>
                 </div>
             </div>
         </nav>

@@ -1,20 +1,20 @@
 <?php
 
-use App\Http\Controllers\AlumnoController;
+use App\Http\Controllers\Alumnos\AlumnoController;
 use App\Http\Controllers\ComidaController;
-use App\Http\Controllers\HuellaController;
+use App\Http\Controllers\Huellas\HuellaController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\ReporteController;
+use App\Http\Controllers\Reportes\ReporteController;
 use Illuminate\Support\Facades\Route;
 
 /*
-|--------------------------------------------------------------------------
+|-------------------------------------------------------------------------- 
 | Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
+|-------------------------------------------------------------------------- 
+| 
+| Aquí puedes registrar las rutas web para tu aplicación. 
+| Estas rutas son cargadas por el RouteServiceProvider y todas se asignarán 
+| al grupo de middleware "web". 
 |
 */
 
@@ -33,21 +33,18 @@ Route::middleware('auth')->group(function () {
 });
 
 // **Rutas para gestión de alumnos**
-Route::get('/alumnos', [AlumnoController::class, 'index'])->name('alumnos.index');
-Route::get('/alumnos/crear', [AlumnoController::class, 'create'])->name('alumnos.create');
-Route::post('/alumnos', [AlumnoController::class, 'store'])->name('alumnos.store');
+Route::get('dashboard/alumnos/registrar', [AlumnoController::class, 'create'])->name('registrar.alumno');
+Route::get('dashboard/alumnos/listado', [AlumnoController::class, 'index'])->name('listado.alumnos');
 
 // **Rutas para gestión de huellas**
-Route::get('/huellas/crear', [HuellaController::class, 'create'])->name('huellas.create');
-Route::post('/huellas', [HuellaController::class, 'store'])->name('huellas.store'); 
-Route::get('/huellas/sin-huella', [HuellaController::class, 'sinHuella'])->name('huellas.sin_huella');
+Route::get('dashboard/huellas/registrar', [HuellaController::class, 'create'])->name('registrar.huella');
+Route::get('dashboard/huellas/listado-sin-huella', [HuellaController::class, 'sinHuella'])->name('listado.sin_huella');
 
 // **Rutas para registro de comidas**
-Route::get('/comidas/registrar', [ComidaController::class, 'create'])->name('comidas.create');
-Route::post('/comidas', [ComidaController::class, 'store'])->name('comidas.store');
+Route::get('dashboard/comidas/registrar', [ComidaController::class, 'create'])->name('registrar.comida');
 
 // **Rutas para reportes**
-Route::get('/reportes/alumnos', [ReporteController::class, 'alumnos'])->name('reportes.alumnos');
-Route::get('/reportes/comidas', [ReporteController::class, 'comidas'])->name('reportes.comidas');
+Route::get('dashboard/reportes/alumnos', [ReporteController::class, 'alumnos'])->name('reportes.alumnos');
+Route::get('dashboard/reportes/comidas', [ReporteController::class, 'comidas'])->name('reportes.comidas');
 
 require __DIR__.'/auth.php';
