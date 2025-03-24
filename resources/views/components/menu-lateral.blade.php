@@ -55,6 +55,9 @@
                     <a href="#"
                         class="block px-4 py-2 text-sm text-orange-300 rounded-md hover:bg-orange-700">Registro de
                         Huella</a>
+                    <a href="#"
+                        class="block px-4 py-2 text-sm text-orange-300 rounded-md hover:bg-orange-700">Alumnos sin
+                        Huella</a>
                 </div>
             </div>
 
