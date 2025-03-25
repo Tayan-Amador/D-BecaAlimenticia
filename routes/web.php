@@ -32,24 +32,27 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-// **Rutas para gestión de alumnos**
-Route::prefix("alumnos")->as("alumnos.")->group(function () {
-    Route::get("/index", [AlumnoController::class, "index"])->name("index");
-    /* Route::get("/editar/{id}", [MateriasController::class, "editar"])->name("editar");
-    Route::post("/actualizar", [MateriasController::class, "actualizar"])->name("actualizar"); */
+// Gestión de Alumnos
+Route::middleware('auth')->prefix('alumnos')->as('alumnos.')->group(function () {
+    Route::get('/registrar', [AlumnoController::class, 'create'])->name('registrar');
+    Route::get('/listado', [AlumnoController::class, 'index'])->name('listado');
 });
-Route::get('dashboard/alumnos/registrar', [AlumnoController::class, 'create'])->name('registrar.alumno');
-Route::get('dashboard/alumnos/listado', [AlumnoController::class, 'index'])->name('listado.alumnos');
 
-// **Rutas para gestión de huellas**
-Route::get('dashboard/huellas/registrar', [HuellaController::class, 'create'])->name('registrar.huella');
-Route::get('dashboard/huellas/listado-sin-huella', [HuellaController::class, 'sinHuella'])->name('listado.sin_huella');
+// Gestión de Huellas
+Route::middleware('auth')->prefix('huellas')->as('huellas.')->group(function () {
+    Route::get('/registrar', [HuellaController::class, 'create'])->name('registrar');
+    Route::get('/listado-sin-huella', [HuellaController::class, 'sinHuella'])->name('listado.sin_huella');
+});
 
-// **Rutas para registro de comidas**
-Route::get('dashboard/comidas/registrar', [ComidaController::class, 'create'])->name('registrar.comida');
+// Registro de Comidas
+Route::middleware('auth')->prefix('comidas')->as('comidas.')->group(function () {
+    Route::get('/registrar', [ComidaController::class, 'create'])->name('registrar');
+});
 
-// **Rutas para reportes**
-Route::get('dashboard/reportes/alumnos', [ReporteController::class, 'alumnos'])->name('reportes.alumnos');
-Route::get('dashboard/reportes/comidas', [ReporteController::class, 'comidas'])->name('reportes.comidas');
+// Reportes
+Route::middleware('auth')->prefix('reportes')->as('reportes.')->group(function () {
+    Route::get('/alumnos', [ReporteController::class, 'alumnos'])->name('alumnos');
+    Route::get('/comidas', [ReporteController::class, 'comidas'])->name('comidas');
+});
 
 require __DIR__.'/auth.php';

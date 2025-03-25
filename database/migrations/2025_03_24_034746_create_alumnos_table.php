@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('semestre');
             $table->string('telefono');
             $table->string('status');
-            $table->blob('huella');
+            $table->binary('huella');
             $table->timestamps();
         });
     }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Alumnos;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Alumnos\Alumno;
 
 class AlumnoController extends Controller
 {
@@ -12,7 +13,8 @@ class AlumnoController extends Controller
      */
     public function index()
     {
-        return view('dashboard.alumnos.registro-alumno');
+        $alumnos = Alumno::all();
+        return view('dashboard.alumnos.listado-alumnos', compact('alumnos'));
     }
 
     /**
@@ -20,7 +22,7 @@ class AlumnoController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboard.alumnos.registro-alumno');
     }
 
     /**

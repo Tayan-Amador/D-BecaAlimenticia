@@ -29,47 +29,16 @@
                     </svg>
                 </button>
                 <div class="hidden space-y-1 pl-11" id="alumnos-dropdown">
-                    <a href="{{ route('alumnos.index') }}"
+                    <a href="{{ route('alumnos.registrar') }}"
                         class="block px-4 py-2 text-sm text-orange-300 rounded-md hover:bg-orange-700">
                         Registrar Alumno
                     </a>
-                    <a href="{{ route('listado.alumnos') }}"
+                    <a href="{{ route('alumnos.listado') }}"
                         class="block px-4 py-2 text-sm text-orange-300 rounded-md hover:bg-orange-700">
                         Listado de Alumnos
                     </a>
                 </div>
             </div>
-
-            <!-- Gestión de Huellas -->
-            <div>
-                <button
-                    class="w-full flex items-center justify-between px-4 py-2.5 text-sm font-medium rounded-lg text-orange-300 hover:bg-orange-700"
-                    aria-expanded="false" aria-controls="huellas-dropdown">
-                    <span>🛑 Huellas</span>
-                    <svg class="h-5 w-5 transition-transform" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
-                        fill="currentColor">
-                        <path fill-rule="evenodd"
-                            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                            clip-rule="evenodd" />
-                    </svg>
-                </button>
-                <div class="hidden space-y-1 pl-11" id="huellas-dropdown">
-                    <a href="{{ route('registrar.huella') }}"
-                        class="block px-4 py-2 text-sm text-orange-300 rounded-md hover:bg-orange-700">
-                        Registro de Huella
-                    </a>
-                    <a href="{{ route('listado.sin_huella') }}"
-                        class="block px-4 py-2 text-sm text-orange-300 rounded-md hover:bg-orange-700">
-                        Alumnos sin Huella
-                    </a>
-                </div>
-            </div>
-
-            <!-- Registro de Comidas -->
-            <a href="{{ route('registrar.comida') }}"
-                class="flex items-center px-4 py-2.5 text-sm font-medium rounded-lg text-orange-300 hover:bg-orange-700">
-                🍽️ Registro de Comida
-            </a>
 
             <!-- Reportes -->
             <div>
