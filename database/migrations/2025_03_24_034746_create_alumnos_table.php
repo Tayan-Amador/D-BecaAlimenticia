@@ -6,20 +6,19 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
+
     public function up(): void
     {
         Schema::create('alumnos', function (Blueprint $table) {
             $table->id();
-            $table->string('expediente')->unique();
+            $table->string('expediente');
             $table->string('nombre');
-            $table->string('correo')->unique();
-            $table->string('genero');
+            $table->string('correo');
+            $table->string('carrera');
+            $table->string('semestre');
             $table->string('telefono');
             $table->string('status');
-            $table->string('huella');
+            $table->blob('huella');
             $table->timestamps();
         });
     }

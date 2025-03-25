@@ -29,7 +29,7 @@
                     </svg>
                 </button>
                 <div class="hidden space-y-1 pl-11" id="alumnos-dropdown">
-                    <a href="{{ route('registrar.alumno') }}"
+                    <a href="{{ route('alumnos.index') }}"
                         class="block px-4 py-2 text-sm text-orange-300 rounded-md hover:bg-orange-700">
                         Registrar Alumno
                     </a>

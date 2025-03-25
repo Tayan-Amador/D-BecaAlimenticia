@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('comidas', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('alumno_id')->constrained()->restrictOnDelete();
+            $table->string('status');
             $table->timestamps();
         });
     }

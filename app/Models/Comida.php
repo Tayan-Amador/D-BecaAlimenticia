@@ -12,7 +12,6 @@ class Comida extends Model
     protected $fillable = [
         'alumno_id',
         'fecha',
-        'comida',
         'status',
     ];
 }

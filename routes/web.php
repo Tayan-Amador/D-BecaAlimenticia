@@ -33,6 +33,11 @@ Route::middleware('auth')->group(function () {
 });
 
 // **Rutas para gestión de alumnos**
+Route::prefix("alumnos")->as("alumnos.")->group(function () {
+    Route::get("/index", [AlumnoController::class, "index"])->name("index");
+    /* Route::get("/editar/{id}", [MateriasController::class, "editar"])->name("editar");
+    Route::post("/actualizar", [MateriasController::class, "actualizar"])->name("actualizar"); */
+});
 Route::get('dashboard/alumnos/registrar', [AlumnoController::class, 'create'])->name('registrar.alumno');
 Route::get('dashboard/alumnos/listado', [AlumnoController::class, 'index'])->name('listado.alumnos');
 

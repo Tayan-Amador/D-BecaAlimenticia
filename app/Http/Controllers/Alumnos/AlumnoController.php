@@ -12,7 +12,7 @@ class AlumnoController extends Controller
      */
     public function index()
     {
-        //
+        return view('dashboard.alumnos.registro-alumno');
     }
 
     /**
