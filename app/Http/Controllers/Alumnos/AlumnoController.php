@@ -30,7 +30,24 @@ class AlumnoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
+        $request->validate([
+            'expediente' => 'required',
+            'nombre' => 'required',
+            'correo' => 'required',
+            'telefono' => 'required',
+            'carrera' => 'required',
+        ]);
+
+        Alumno::create([
+            'expediente' => $request->expediente,
+            'nombre' => $request->nombre,
+            'correo' => $request->correo,
+            'telefono' => $request->telefono,
+            'carrera' => $request->carrera,
+        ]);
+
+        return redirect()->route('alumnos.registro');
     }
 
     /**

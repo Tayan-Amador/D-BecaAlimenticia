@@ -17,8 +17,8 @@ return new class extends Migration
             $table->string('carrera');
             $table->string('semestre');
             $table->string('telefono');
-            $table->string('status');
-            $table->binary('huella');
+            $table->string('status')->default('activo');
+            $table->binary('huella')->nullable();
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('alumnos');
+       // Schema::dropIfExists('alumnos');
     }
 };

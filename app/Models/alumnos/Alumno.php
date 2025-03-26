@@ -14,7 +14,6 @@ class Alumno extends Model
         'nombre',
         'correo',
         'carrera',
-        'semestre',
         'telefono',
         'status',
         'huella', 

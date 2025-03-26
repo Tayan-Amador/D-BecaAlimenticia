@@ -34,8 +34,10 @@ Route::middleware('auth')->group(function () {
 
 // Gestión de Alumnos
 Route::middleware('auth')->prefix('alumnos')->as('alumnos.')->group(function () {
-    Route::get('/registrar', [AlumnoController::class, 'create'])->name('registrar');
+    Route::get('/vista-registro', [AlumnoController::class, 'create'])->name('registro');
     Route::get('/listado', [AlumnoController::class, 'index'])->name('listado');
+    Route::post('/registrar', [AlumnoController::class, 'store'])->name('registrar');
+
 });
 
 // Gestión de Huellas

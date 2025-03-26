@@ -13,25 +13,21 @@
                 <h2 class="text-4xl font-bold text-gray-900 text-center mb-6">Registro de Alumnos</h2>
 
                 <!-- Formulario -->
-                <form id="miFormulario" action=" " method="POST" class="space-y-6">
+                <form id="miFormulario" action="{{ route('alumnos.registrar') }} " method="POST" class="space-y-6">
                     @csrf
 
-                    <div class="relative flex space-x-4 w-full ">
-                        <div class="flex flex-col w-4/5">
+                    <div class="relative">
+                        <label for="expediente" class="text-gray-800 font-semibold text-lg">Expediente</label>
+                        <input type="text" name="expediente" id="expediente" required
+                            class="w-full px-4 py-3 text-md border rounded-lg focus:ring-3 focus:ring-indigo-500 focus:outline-none mt-1">
+                   
+                </div>
+
+                    <div class="relative">
                             <label for="nombre" class="text-gray-800 font-semibold text-lg">Nombre completo</label>
                             <input type="text" name="nombre" id="nombre" required
                                 class="w-full px-4 py-3 text-md border rounded-lg focus:ring-3 focus:ring-indigo-500 focus:outline-none mt-1">
-                        </div>
-
-
-                        <div class="flex flex-col w-1/5">
-                            <label for="edad" class="text-gray-800 font-semibold text-lg">Edad</label>
-                            <input type="text" name="edad" id="edad" required
-                                class="w-full px-4 py-3 text-md border rounded-lg focus:ring-3 focus:ring-indigo-500 focus:outline-none mt-1"
-                                oninput="validarNumerico(this, 'error-edad')">
-                            <span id="error-edad" class="text-red-500 text-sm hidden">Por favor, ingresa solo números
-                                válidos.</span>
-                        </div>
+                       
                     </div>
 
                     <div class="relative">
@@ -48,37 +44,12 @@
                         <span id="error-telefono" class="text-red-500 text-sm hidden">Por favor, ingresa solo números
                             válidos.</span>
                     </div>
+                      
 
-                    <div class="relative flex space-x-4">
-                        <div class="w-1/2">
-                            <label for="tipo_participante" class="text-gray-800 font-semibold text-lg">Tipo de
-                                Participante</label>
-                            <select id="tipo_participante" name="tipo_participante"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                <option selected disabled>Selecciona un tipo</option>
-                                <option value="publico">Publico</option>
-                                <option value="aspirante">Aspirante</option>
-                                <option value="estudiante">Estudiante</option>
-                                <option value="estudiante">Docente</option>
-                            </select>
-                        </div>
-
-                        <div class="w-1/2">
-                            <label for="genero" class="text-gray-800 font-semibold text-lg">Género</label>
-                            <select id="genero" name="genero"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                <option selected disabled>Selecciona un género</option>
-                                <option value="masculino">Masculino</option>
-                                <option value="femenino">Femenino</option>
-                                <option value="otro">Otro</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="relative w-full" hidden id="carrera">
+                    <div class="relative w-full" id="carrera">
                         <button id="dropdownSearchButton" data-dropdown-toggle="dropdownSearch"
                             class="w-full flex justify-between items-center px-4 py-2 text-sm font-medium text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300"
-                            type="button">Carreras <svg class="w-2.5 h-2.5  ms-2.5" aria-hidden="true"
+                            type="button">Carreras<svg class="w-2.5 h-2.5  ms-2.5" aria-hidden="true"
                                 xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                                     stroke-width="2" d="m1 1 4 4 4-4" />
@@ -108,7 +79,7 @@
                                 <li>
                                     <div
                                         class="flex items-center p-2 rounded-sm hover:bg-gray-100 dark:hover:bg-gray-600">
-                                        <input id="checkbox-administracion" type="checkbox" name="carreras[]"
+                                        <input id="checkbox-administracion" type="radio" name="carrera"
                                             value="Administracion"
                                             class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
                                         <label for="checkbox-administracion"
@@ -119,7 +90,7 @@
                                 <li>
                                     <div
                                         class="flex items-center p-2 rounded-sm hover:bg-gray-100 dark:hover:bg-gray-600">
-                                        <input id="checkbox-comercio" type="checkbox" name="carreras[]"
+                                        <input id="checkbox-comercio" type="radio" name="carrera"
                                             value="Comercio"
                                             class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
                                         <label for="checkbox-comercio"
@@ -130,7 +101,7 @@
                                 <li>
                                     <div
                                         class="flex items-center p-2 rounded-sm hover:bg-gray-100 dark:hover:bg-gray-600">
-                                        <input id="checkbox-nutricion" type="checkbox" name="carreras[]"
+                                        <input id="checkbox-nutricion" type="radio" name="carrera"
                                             value="Nutricion"
                                             class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
                                         <label for="checkbox-nutricion"
@@ -141,7 +112,7 @@
                                 <li>
                                     <div
                                         class="flex items-center p-2 rounded-sm hover:bg-gray-100 dark:hover:bg-gray-600">
-                                        <input id="checkbox-criminologia" type="checkbox" name="carreras[]"
+                                        <input id="checkbox-criminologia" type="radio" name="carrera"
                                             value="Criminologia"
                                             class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
                                         <label for="checkbox-criminologia"
@@ -152,7 +123,7 @@
                                 <li>
                                     <div
                                         class="flex items-center p-2 rounded-sm hover:bg-gray-100 dark:hover:bg-gray-600">
-                                        <input id="checkbox-enfermeria" type="checkbox" name="carreras[]"
+                                        <input id="checkbox-enfermeria" type="radio" name="carrera"
                                             value="Enfermeria"
                                             class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
                                         <label for="checkbox-enfermeria"
@@ -163,7 +134,7 @@
                                 <li>
                                     <div
                                         class="flex items-center p-2 rounded-sm hover:bg-gray-100 dark:hover:bg-gray-600">
-                                        <input id="checkbox-ingles" type="checkbox" name="carreras[]"
+                                        <input id="checkbox-ingles" type="radio" name="carrera"
                                             value="Enseñanza Ingles"
                                             class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
                                         <label for="checkbox-ingles"
@@ -174,18 +145,18 @@
                                 <li>
                                     <div
                                         class="flex items-center p-2 rounded-sm hover:bg-gray-100 dark:hover:bg-gray-600">
-                                        <input id="checkbox-software" type="checkbox" name="carreras[]"
-                                            value="Fisioteapia"
+                                        <input id="checkbox-software" type="radio" name="carrera"
+                                            value="Fisioterapia"
                                             class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
                                         <label for="checkbox-software"
                                             class="w-full ms-2 text-sm font-medium text-gray-900 rounded-sm dark:text-gray-300">Lic.
-                                            Fisioteapia</label>
+                                            Fisioterapia</label>
                                     </div>
                                 </li>
                                 <li>
                                     <div
                                         class="flex items-center p-2 rounded-sm hover:bg-gray-100 dark:hover:bg-gray-600">
-                                        <input id="checkbox-software" type="checkbox" name="carreras[]"
+                                        <input id="checkbox-software" type="radio" name="carrera"
                                             value="Entrenamiento Deportivo"
                                             class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
                                         <label for="checkbox-software"
@@ -196,7 +167,7 @@
                                 <li>
                                     <div
                                         class="flex items-center p-2 rounded-sm hover:bg-gray-100 dark:hover:bg-gray-600">
-                                        <input id="checkbox-geociencias" type="checkbox" name="carreras[]"
+                                        <input id="checkbox-geociencias" type="radio" name="carrera"
                                             value="Geociencias"
                                             class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
                                         <label for="checkbox-geociencias"
@@ -207,7 +178,7 @@
                                 <li>
                                     <div
                                         class="flex items-center p-2 rounded-sm hover:bg-gray-100 dark:hover:bg-gray-600">
-                                        <input id="checkbox-industrial" type="checkbox" name="carreras[]"
+                                        <input id="checkbox-industrial" type="radio" name="carrera"
                                             value="Industrial"
                                             class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
                                         <label for="checkbox-industrial"
@@ -218,7 +189,7 @@
                                 <li>
                                     <div
                                         class="flex items-center p-2 rounded-sm hover:bg-gray-100 dark:hover:bg-gray-600">
-                                        <input id="checkbox-software" type="checkbox" name="carreras[]"
+                                        <input id="checkbox-software" type="radio" name="carrera"
                                             value="Software"
                                             class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
                                         <label for="checkbox-software"
@@ -229,7 +200,7 @@
                                 <li>
                                     <div
                                         class="flex items-center p-2 rounded-sm hover:bg-gray-100 dark:hover:bg-gray-600">
-                                        <input id="checkbox-software" type="checkbox" name="carreras[]"
+                                        <input id="checkbox-software" type="radio" name="carrera"
                                             value="Horticultura"
                                             class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
                                         <label for="checkbox-software"
@@ -290,61 +261,36 @@
 
     {{-- Script patra la funcion del select carreras --}}
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const select = document.getElementById("tipo_participante");
-            const carreraDiv = document.getElementById("carrera");
-            const checkboxes = document.querySelectorAll('#carrera input[type="checkbox"]');
-            const form = document.querySelector("form");
-            let errorMessage = document.getElementById("error-message");
+document.addEventListener("DOMContentLoaded", function() {
+    const dropdownButton = document.getElementById("dropdownSearchButton");
+    const dropdownMenu = document.getElementById("dropdownSearch");
+    const checkboxes = document.querySelectorAll('#carrera input[type="checkbox"]');
 
-            if (!errorMessage) {
-                errorMessage = document.createElement("p");
-                errorMessage.id = "error-message";
-                errorMessage.textContent = "Debes seleccionar al menos una carrera.";
-                errorMessage.style.color = "red";
-                errorMessage.style.display = "none";
-                carreraDiv.appendChild(errorMessage);
-            }
+    // ✅ Mostrar/Ocultar dropdown al hacer clic en el botón
+    dropdownButton.addEventListener("click", function (event) {
+        event.stopPropagation();
+        dropdownMenu.classList.toggle("hidden");
+    });
 
-            function handleSingleSelection(event) {
-                if ((select.value === "estudiante" || select.value === "docente") && event.target.checked) {
-                    checkboxes.forEach(cb => {
-                        if (cb !== event.target) cb.checked = false;
-                    });
-                }
-            }
+    // ✅ Cierra el dropdown si se hace clic fuera de él
+    document.addEventListener("click", function (event) {
+        if (!dropdownButton.contains(event.target) && !dropdownMenu.contains(event.target)) {
+            dropdownMenu.classList.add("hidden");
+        }
+    });
 
-            select.addEventListener("change", function() {
-                checkboxes.forEach(cb => cb.checked = false); // Borra la selección al cambiar
-
-                if (this.value === "aspirante" || this.value === "estudiante" || this.value === "docente") {
-                    carreraDiv.removeAttribute("hidden");
-                } else {
-                    carreraDiv.setAttribute("hidden", "true");
-                }
-
-                checkboxes.forEach(checkbox => {
-                    checkbox.removeEventListener("change", handleSingleSelection);
-                    if (select.value === "estudiante" || select.value === "docente") {
-                        checkbox.addEventListener("change", handleSingleSelection);
-                    }
+    // ✅ Permitir seleccionar solo una opción a la vez
+    checkboxes.forEach(checkbox => {
+        checkbox.addEventListener("change", function () {
+            if (this.checked) {
+                checkboxes.forEach(cb => {
+                    if (cb !== this) cb.checked = false; // Desmarca las demás opciones
                 });
-            });
-
-            form.addEventListener("submit", function(event) {
-                const selectedValue = select.value;
-                const isCareerRequired = selectedValue === "aspirante" || selectedValue === "estudiante" ||
-                    selectedValue === "docente";
-                const isChecked = Array.from(checkboxes).some(checkbox => checkbox.checked);
-
-                if (isCareerRequired && !isChecked) {
-                    event.preventDefault();
-                    errorMessage.style.display = "block";
-                } else {
-                    errorMessage.style.display = "none";
-                }
-            });
+            }
         });
+    });
+});
+
     </script>
 
 
