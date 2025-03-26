@@ -16,8 +16,8 @@ class AdministradoresSeeder extends Seeder
     {
         DB::table('users')->insert([
             [
-                'name' => 'Admin1',
-                'email' => 'jaimep@dsoftsonora.com',
+                'name' => 'Admin Principal',
+                'email' => 'admin@gmail.com',
                 'password' => Hash::make('Ues1234@'),
                 'created_at' => now(),
                 'updated_at' => now(),
