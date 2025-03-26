@@ -8,7 +8,7 @@
         </aside>
 
         <div class="w-full bg-white flex items-center justify-center min-h-full p-2">
-            <div class="container max-w-6xl mt-[-400px]">
+            <div class="container max-w-6xl mt-[-100px]">
                 <div class="bg-gray-300 rounded-xl shadow-md overflow-hidden">
                     <!-- Table Header -->
                     <div class="p-6 border-b border-gray-200">
@@ -63,8 +63,6 @@
                                     </th>
                                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Carrera
                                     </th>
-                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Semestre
-                                    </th>
                                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Teléfono
                                     </th>
                                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Estatus
@@ -80,7 +78,6 @@
                                         <td class="px-6 py-4">{{ $alumno->nombre }}</td>
                                         <td class="px-6 py-4">{{ $alumno->correo }}</td>
                                         <td class="px-6 py-4">{{ $alumno->carrera }}</td>
-                                        <td class="px-6 py-4">{{ $alumno->semestre }}</td>
                                         <td class="px-6 py-4">{{ $alumno->telefono }}</td>
                                         <td class="px-6 py-4">
                                             <span
