@@ -3,12 +3,12 @@
 
     <div class="flex min-h-screen bg-gray-100">
         <!-- Menú lateral -->
-        <aside class="flex min-h-screen">
+        <aside class="hidden md:flex min-h-screen">
             @include('components.menu-lateral')
         </aside>
 
         <div class="w-full bg-white flex items-center justify-center min-h-full p-2">
-            <div class="container max-w-6xl mt-[-100px]">
+            <div class="container max-w-6xl md:mt-[-100px]">
                 <div class="bg-gray-300 rounded-xl shadow-md overflow-hidden">
                     <!-- Table Header -->
                     <div class="p-6 border-b border-gray-200">
@@ -19,15 +19,16 @@
                             </div>
                             <div class="mt-4 md:mt-0">
                                 <button
-                                    class="bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-4 rounded-lg transition duration-150 ease-in-out">
-                                    Imprimir Reporte
-                                </button>
+                                    class="bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-4 rounded-lg transition duration-150 ease-in-out">Imprimir
+                                    Reporte</button>
                             </div>
                         </div>
 
                         <!-- Search and Filter -->
                         <div class="mt-6 flex flex-col sm:flex-row gap-4">
                             <div class="relative flex-grow">
+                                <input type="text" class="pl-10 pr-4 py-2 border border-gray-300 rounded-lg w-full"
+                                    placeholder="Buscar alumno...">
                                 <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                                     <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg"
                                         fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
@@ -36,8 +37,6 @@
                                             clip-rule="evenodd" />
                                     </svg>
                                 </div>
-                                <input type="text" class="pl-10 pr-4 py-2 border border-gray-300 rounded-lg w-full"
-                                    placeholder="Buscar alumno...">
                             </div>
                             <div>
                                 <select class="border border-gray-300 rounded-lg px-4 py-2 w-full sm:w-auto"
@@ -113,4 +112,5 @@
                 });
             });
         </script>
+    </div>
 </x-app-layout>
