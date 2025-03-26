@@ -47,7 +47,7 @@ class AlumnoController extends Controller
             'carrera' => $request->carrera,
         ]);
 
-        return redirect()->route('alumnos.registro');
+        return redirect()->route('alumnos.registro')->with('success', 'Alumno registrado exitosamente.');
     }
 
     /**

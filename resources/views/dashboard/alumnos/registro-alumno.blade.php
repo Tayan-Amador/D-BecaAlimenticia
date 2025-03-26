@@ -233,31 +233,26 @@
                     title: "¡Registro exitoso!",
                     text: "{{ session('success') }}",
                     icon: "success",
-                    timer: 3000, // Se cierra automáticamente después de 3 segundos
+                    timer: 3000,
                     showConfirmButton: false,
-                    background: "#f0fdfa", // Verde claro
-                    color: "#065f46", // Verde oscuro
+                    background: "#f0fdfa",
+                    color: "#065f46",
                 });
             @endif
-
+    
             @if ($errors->any())
                 Swal.fire({
                     title: "¡Ups! Algo salió mal",
-                    html: `<div style="text-align: left; font-size: 16px; color: #B91C1C;">
-                        @foreach ($errors->all() as $error)
-                            🔴 {{ $error }}<br>
-                        @endforeach
-                    </div>`,
+                    html: `{!! implode('<br>', $errors->all()) !!}`,
                     icon: "error",
                     confirmButtonText: "Revisar",
-                    confirmButtonColor: "#DC2626", // Rojo oscuro
-                    background: "#FEF2F2", // Fondo rojo claro
-                    color: "#7F1D1D", // Texto rojo oscuro
+                    confirmButtonColor: "#DC2626",
+                    background: "#FEF2F2",
+                    color: "#7F1D1D",
                 });
             @endif
         });
     </script>
-
 
     {{-- Script patra la funcion del select carreras --}}
     <script>
