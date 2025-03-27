@@ -42,8 +42,14 @@ Route::middleware('auth')->prefix('alumnos')->as('alumnos.')->group(function () 
 
 // Gestión de Huellas
 Route::middleware('auth')->prefix('huellas')->as('huellas.')->group(function () {
-    Route::get('/registrar', [HuellaController::class, 'create'])->name('registrar');
-    Route::get('/listado-sin-huella', [HuellaController::class, 'sinHuella'])->name('listado.sin_huella');
+        // vista
+        Route::get('/listado', [HuellaController::class, 'create'])->name('alumnos_listado');
+    
+        // accion de debolver alumnos sin huella
+        Route::get('/alumnos-sin-huella', [HuellaController::class, 'alumnos_sinhuella'])->name('alumnos_sh');
+
+        // accion de asignar huella
+        Route::post('/asignar-huella/{id}', [HuellaController::class, 'asignarHuella'])->name('asignar_huella');
 });
 
 // Registro de Comidas

@@ -4,62 +4,50 @@ namespace App\Http\Controllers\Huellas;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Alumnos\Alumno;
 
 class HuellaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        return view('pruebas.alumnos_faltantes');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
+    public function alumnos_sinhuella(){
+        try {
+            $alumnosSH = Alumno::whereNull('huella')->get();
+            return response()->json($alumnosSH);
+        } catch (\Exception $e) {
+            // Si ocurre un error, devuelve un mensaje de error con el código 500
+            return response()->json(['error' => 'Ocurrió un error al obtener los alumnos.'], 500);
+        }
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function asignarHuella(Request $request, $id)
     {
-        //
+        // Validar los datos de la huella
+        $request->validate([
+            'huella_data' => 'required|string',  // Validamos que la huella esté presente como string o JSON
+        ]);
+
+        // Buscar al alumno por su ID
+        $alumno = Alumno::find($id);
+        if (!$alumno) {
+            return response()->json(['error' => 'Alumno no encontrado.'], 404);
+        }
+
+        // Obtener los datos de la huella
+        $huellaData = $request->input('huella_data');
+
+        // Almacenar la huella en la base de datos
+        $alumno->huella = $huellaData;
+        $alumno->save();
+
+        // Responder con éxito
+        return response()->json(['success' => 'Huella asignada correctamente.']);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
+    
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
-    }
+  
 }
