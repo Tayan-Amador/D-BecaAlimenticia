@@ -1,7 +1,7 @@
 <x-app-layout>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    <div class="flex min-h-screen bg-gray-100">
+    <div class="flex min-h-screen">
         <!-- Menú lateral -->
         <aside class="flex min-h-screen">
             @include('components.menu-lateral')
@@ -20,14 +20,12 @@
                         <label for="expediente" class="text-gray-800 font-semibold text-lg">Expediente</label>
                         <input type="text" name="expediente" id="expediente" required
                             class="w-full px-4 py-3 text-md border rounded-lg focus:ring-3 focus:ring-indigo-500 focus:outline-none mt-1">
-                   
-                </div>
+                    </div>
 
                     <div class="relative">
-                            <label for="nombre" class="text-gray-800 font-semibold text-lg">Nombre completo</label>
-                            <input type="text" name="nombre" id="nombre" required
-                                class="w-full px-4 py-3 text-md border rounded-lg focus:ring-3 focus:ring-indigo-500 focus:outline-none mt-1">
-                       
+                        <label for="nombre" class="text-gray-800 font-semibold text-lg">Nombre completo</label>
+                        <input type="text" name="nombre" id="nombre" required
+                            class="w-full px-4 py-3 text-md border rounded-lg focus:ring-3 focus:ring-indigo-500 focus:outline-none mt-1">
                     </div>
 
                     <div class="relative">
@@ -44,7 +42,7 @@
                         <span id="error-telefono" class="text-red-500 text-sm hidden">Por favor, ingresa solo números
                             válidos.</span>
                     </div>
-                      
+
 
                     <div class="relative" id="carrera">
                         <button id="dropdownSearchButton" data-dropdown-toggle="dropdownSearch"
@@ -90,8 +88,7 @@
                                 <li>
                                     <div
                                         class="flex items-center p-2 rounded-sm hover:bg-gray-100 dark:hover:bg-gray-600">
-                                        <input id="checkbox-comercio" type="radio" name="carrera"
-                                            value="Comercio"
+                                        <input id="checkbox-comercio" type="radio" name="carrera" value="Comercio"
                                             class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
                                         <label for="checkbox-comercio"
                                             class="w-full ms-2 text-sm font-medium text-gray-900 rounded-sm dark:text-gray-300">Lic.
@@ -101,8 +98,7 @@
                                 <li>
                                     <div
                                         class="flex items-center p-2 rounded-sm hover:bg-gray-100 dark:hover:bg-gray-600">
-                                        <input id="checkbox-nutricion" type="radio" name="carrera"
-                                            value="Nutricion"
+                                        <input id="checkbox-nutricion" type="radio" name="carrera" value="Nutricion"
                                             class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
                                         <label for="checkbox-nutricion"
                                             class="w-full ms-2 text-sm font-medium text-gray-900 rounded-sm dark:text-gray-300">Lic.
@@ -189,8 +185,7 @@
                                 <li>
                                     <div
                                         class="flex items-center p-2 rounded-sm hover:bg-gray-100 dark:hover:bg-gray-600">
-                                        <input id="checkbox-software" type="radio" name="carrera"
-                                            value="Software"
+                                        <input id="checkbox-software" type="radio" name="carrera" value="Software"
                                             class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
                                         <label for="checkbox-software"
                                             class="w-full ms-2 text-sm font-medium text-gray-900 rounded-sm dark:text-gray-300">Ing.
@@ -222,8 +217,7 @@
         </div>
     </div>
 
-
-
+    @include('layouts.footer')
 
     {{-- Alerta de registro --}}
     <script>
@@ -239,7 +233,7 @@
                     color: "#065f46",
                 });
             @endif
-    
+
             @if ($errors->any())
                 Swal.fire({
                     title: "¡Ups! Algo salió mal",
@@ -256,36 +250,36 @@
 
     {{-- Script patra la funcion del select carreras --}}
     <script>
-document.addEventListener("DOMContentLoaded", function() {
-    const dropdownButton = document.getElementById("dropdownSearchButton");
-    const dropdownMenu = document.getElementById("dropdownSearch");
-    const checkboxes = document.querySelectorAll('#carrera input[type="checkbox"]');
+        document.addEventListener("DOMContentLoaded", function() {
+            const dropdownButton = document.getElementById("dropdownSearchButton");
+            const dropdownMenu = document.getElementById("dropdownSearch");
+            const checkboxes = document.querySelectorAll('#carrera input[type="checkbox"]');
 
-    // ✅ Mostrar/Ocultar dropdown al hacer clic en el botón
-    dropdownButton.addEventListener("click", function (event) {
-        event.stopPropagation();
-        dropdownMenu.classList.toggle("hidden");
-    });
+            // ✅ Mostrar/Ocultar dropdown al hacer clic en el botón
+            dropdownButton.addEventListener("click", function(event) {
+                event.stopPropagation();
+                dropdownMenu.classList.toggle("hidden");
+            });
 
-    // ✅ Cierra el dropdown si se hace clic fuera de él
-    document.addEventListener("click", function (event) {
-        if (!dropdownButton.contains(event.target) && !dropdownMenu.contains(event.target)) {
-            dropdownMenu.classList.add("hidden");
-        }
-    });
+            // ✅ Cierra el dropdown si se hace clic fuera de él
+            document.addEventListener("click", function(event) {
+                if (!dropdownButton.contains(event.target) && !dropdownMenu.contains(event.target)) {
+                    dropdownMenu.classList.add("hidden");
+                }
+            });
 
-    // ✅ Permitir seleccionar solo una opción a la vez
-    checkboxes.forEach(checkbox => {
-        checkbox.addEventListener("change", function () {
-            if (this.checked) {
-                checkboxes.forEach(cb => {
-                    if (cb !== this) cb.checked = false; // Desmarca las demás opciones
+            // ✅ Permitir seleccionar solo una opción a la vez
+            checkboxes.forEach(checkbox => {
+                checkbox.addEventListener("change", function() {
+                    if (this.checked) {
+                        checkboxes.forEach(cb => {
+                            if (cb !== this) cb.checked =
+                                false; // Desmarca las demás opciones
+                        });
+                    }
                 });
-            }
+            });
         });
-    });
-});
-
     </script>
 
 

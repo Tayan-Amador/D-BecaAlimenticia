@@ -6,7 +6,7 @@
 </head>
 
 <body class="bg-orange-100">
-    <aside class="w-64 bg-orange-900 text-white h-screen p-4">
+    <aside class="w-64 bg-orange-900 text-white  p-4">
         <h1 class="text-3xl font-bold text-center pb-4">Beca Alimenticia</h1>
         <nav class="mt-5 space-y-4">
             <!-- Inicio -->

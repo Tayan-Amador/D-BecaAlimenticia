@@ -1,7 +1,7 @@
 <x-app-layout>
-    <div class="flex h-screen bg-gray-100">
+    <div class="flex min-h-screen bg-gray-100">
         <!-- Menú Lateral -->
-        <aside class="text-white h-full">
+        <aside class="flex min-h-screen">
             @include('components.menu-lateral')
         </aside>
 
@@ -19,7 +19,8 @@
                 <div class="max-w-7xl mx-auto">
                     <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6 text-gray-900">
                         <h3 class="text-2xl font-semibold text-gray-800">
-                            {{ __('¡Bienvenido a tu espacio de apoyo alimenticio!') }}</h3>
+                            {{ __('¡Bienvenido a tu espacio de apoyo alimenticio!') }}
+                        </h3>
                         <p class="mt-4 text-lg text-gray-600">
                             {{ __('Nos complace tenerte en el programa de Beca Alimenticia. Sabemos lo importante que es contar con apoyo para una alimentación adecuada, especialmente en momentos de necesidad. Este espacio está diseñado para brindarte el acceso a los recursos alimenticios que necesitas para que puedas concentrarte en tus estudios y en tu bienestar.') }}
                         </p>
@@ -34,4 +35,7 @@
             </main>
         </div>
     </div>
+
+    @include('layouts.footer')
+    
 </x-app-layout>
