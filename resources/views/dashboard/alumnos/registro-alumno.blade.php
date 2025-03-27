@@ -8,8 +8,8 @@
         </aside>
 
         <!-- Contenido principal -->
-        <div class="flex-1 flex items-center justify-center p-10">
-            <div class="bg-white shadow-xl rounded-xl p-10 w-full max-w-2xl">
+        <div class="flex-1 flex items-center w-full p-4">
+            <div class="bg-white shadow-xl rounded-xl p-10 w-full ">
                 <h2 class="text-4xl font-bold text-gray-900 text-center mb-6">Registro de Alumnos</h2>
 
                 <!-- Formulario -->
@@ -46,7 +46,7 @@
                     </div>
                       
 
-                    <div class="relative w-full" id="carrera">
+                    <div class="relative" id="carrera">
                         <button id="dropdownSearchButton" data-dropdown-toggle="dropdownSearch"
                             class="w-full flex justify-between items-center px-4 py-2 text-sm font-medium text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300"
                             type="button">Carreras<svg class="w-2.5 h-2.5  ms-2.5" aria-hidden="true"
@@ -57,7 +57,7 @@
 
                         <!-- Dropdown menu -->
                         <div id="dropdownSearch"
-                            class="absolute top-full left-0 z-10 hidden bg-white rounded-lg shadow-md w-full">
+                            class="absolute bottom-full -mb-3 left-0 z-10 hidden bg-white rounded-lg shadow-md w-64">
                             <div class="p-3">
                                 <label for="input-group-search" class="sr-only">Search</label>
                                 <div class="relative">
