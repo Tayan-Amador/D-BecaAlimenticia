@@ -4,45 +4,42 @@
     <div class="flex min-h-screen">
 
         <!-- Contenido principal -->
-        <div class="flex-1 flex items-center w-full p-4">
-            <div class="bg-white shadow-xl rounded-xl p-10 w-full ">
-                <h2 class="text-4xl font-bold text-gray-900 text-center mb-6">Registro de Alumnos</h2>
+        <div class="flex-1 flex items-center w-full justify-center mx-auto p-4 min-h-screen">
+            <div class="bg-white shadow-xl rounded-xl p-4 sm:p-10 w-full sm:w-[80%] items-center">
+                <h2 class="text-xl sm:text-4xl md:text-5xl lg:text-6xl font-poppins text-gray-900 text-center mb-4 font-bold">Registro de Alumnos</h2>
 
                 <!-- Formulario -->
-                <form id="miFormulario" action="{{ route('alumnos.registrar') }} " method="POST" class="space-y-6">
+                <form id="miFormulario" action="{{ route('alumnos.registrar') }} " method="POST" class="space-y-6 w-full max-w-4xl mx-auto p-4">
                     @csrf
 
                     <div class="relative">
-                        <label for="expediente" class="text-gray-800 font-semibold text-lg">Expediente</label>
+                        <label for="expediente" class="text-gray-800 font-medium text-lg block mb-2 sm:text-base md:text-lg lg:text-xl break-words">Expediente</label>
                         <input type="text" name="expediente" id="expediente" required
                             class="w-full px-4 py-3 text-md border rounded-lg focus:ring-3 focus:ring-indigo-500 focus:outline-none mt-1">
                     </div>
 
                     <div class="relative">
-                        <label for="nombre" class="text-gray-800 font-semibold text-lg">Nombre completo</label>
+                        <label for="nombre" class="text-gray-800 font-medium text-lg block mb-2 sm:text-base md:text-lg lg:text-xl break-words">Nombre completo</label>
                         <input type="text" name="nombre" id="nombre" required
                             class="w-full px-4 py-3 text-md border rounded-lg focus:ring-3 focus:ring-indigo-500 focus:outline-none mt-1">
                     </div>
 
                     <div class="relative">
-                        <label for="correo" class="text-gray-800 font-semibold text-lg">Correo electrónico</label>
-                        <input type="email" name="correo" required
-                            class="w-full px-4 py-3 text-md border rounded-lg focus:ring-3 focus:ring-indigo-500 focus:outline-none mt-1">
+                        <label for="correo" class="text-gray-800 font-medium text-lg block mb-2 sm:text-base md:text-lg lg:text-xl break-words">Correo electrónico</label>
+                        <input type="email" name="correo" id="correo" required class="w-full px-4 py-3 text-md border rounded-lg focus:ring-3 focus:ring-indigo-500 focus:outline-none mt-1">
                     </div>
 
                     <div class="relative">
-                        <label for="telefono" class="text-gray-800 font-semibold text-lg">Número de teléfono</label>
+                        <label for="telefono" class="text-gray-800 font-medium text-lg block mb-2 sm:text-base md:text-lg lg:text-xl break-words">Número de teléfono</label>
                         <input type="text" name="telefono" id="telefono" required
                             class="w-full px-4 py-3 text-md border rounded-lg focus:ring-3 focus:ring-indigo-500 focus:outline-none mt-1"
                             oninput="validarNumerico(this, 'error-telefono')">
-                        <span id="error-telefono" class="text-red-500 text-sm hidden">Por favor, ingresa solo números
-                            válidos.</span>
+                        <span id="error-telefono" class="text-red-500 text-sm hidden">Por favor, ingresa solo números válidos.</span>
                     </div>
-
 
                     <div class="relative" id="carrera">
                         <button id="dropdownSearchButton" data-dropdown-toggle="dropdownSearch"
-                            class="w-full flex justify-between items-center px-4 py-2 text-sm font-medium text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300"
+                            class="w-full flex justify-between items-center px-4 py-2 text-sm font-medium text-white bg-orange-500 rounded-lg hover:bg-orange-600 focus:ring-4 focus:outline-none focus:ring-orange-300"
                             type="button">Carreras<svg class="w-2.5 h-2.5  ms-2.5" aria-hidden="true"
                                 xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
@@ -51,7 +48,7 @@
 
                         <!-- Dropdown menu -->
                         <div id="dropdownSearch"
-                            class="absolute bottom-full -mb-3 left-0 z-10 hidden bg-white rounded-lg shadow-md w-64">
+                            class="absolute bottom-full left-0 z-10 hidden bg-white rounded-lg shadow-md w-full">
                             <div class="p-3">
                                 <label for="input-group-search" class="sr-only">Search</label>
                                 <div class="relative">
@@ -137,10 +134,10 @@
                                 <li>
                                     <div
                                         class="flex items-center p-2 rounded-sm hover:bg-gray-100 dark:hover:bg-gray-600">
-                                        <input id="checkbox-software" type="radio" name="carrera"
+                                        <input id="checkbox-fisioterapia" type="radio" name="carrera"
                                             value="Fisioterapia"
                                             class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-                                        <label for="checkbox-software"
+                                        <label for="checkbox-fisioterapia"
                                             class="w-full ms-2 text-sm font-medium text-gray-900 rounded-sm dark:text-gray-300">Lic.
                                             Fisioterapia</label>
                                     </div>
@@ -148,10 +145,10 @@
                                 <li>
                                     <div
                                         class="flex items-center p-2 rounded-sm hover:bg-gray-100 dark:hover:bg-gray-600">
-                                        <input id="checkbox-software" type="radio" name="carrera"
+                                        <input id="checkbox-entrenamiento" type="radio" name="carrera"
                                             value="Entrenamiento Deportivo"
                                             class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-                                        <label for="checkbox-software"
+                                        <label for="checkbox-entrenamiento"
                                             class="w-full ms-2 text-sm font-medium text-gray-900 rounded-sm dark:text-gray-300">Lic.
                                             Entrenamiento Deportivo</label>
                                     </div>
@@ -191,10 +188,10 @@
                                 <li>
                                     <div
                                         class="flex items-center p-2 rounded-sm hover:bg-gray-100 dark:hover:bg-gray-600">
-                                        <input id="checkbox-software" type="radio" name="carrera"
+                                        <input id="checkbox-horticultura" type="radio" name="carrera"
                                             value="Horticultura"
                                             class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-                                        <label for="checkbox-software"
+                                        <label for="checkbox-horticultura"
                                             class="w-full ms-2 text-sm font-medium text-gray-900 rounded-sm dark:text-gray-300">Ing.
                                             Horticultura</label>
                                     </div>
@@ -203,12 +200,17 @@
                         </div>
                     </div>
 
-                    <button type="submit"
-                        class="w-full bg-indigo-700 text-white font-bold text-lg py-3 rounded-lg hover:bg-indigo-800 transition shadow-md">
-                        Guardar
-                    </button>
-
+                    <div class="flex gap-4 flex-col sm:flex-row w-full">
+                        <button type="submit" class="flex-1 sm:w-auto bg-[#800020] text-white font-bold text-lg py-3 rounded-lg hover:bg-red-800 transition shadow-md">
+                            Guardar
+                        </button>
+                        <button type="button" onclick="confirmarCancelar()" class="flex-1 sm:w-auto bg-gray-500 text-white font-bold text-lg py-3 rounded-lg hover:bg-gray-600 transition shadow-md">
+                            Cancelar
+                        </button>
+                    </div>
+                    
                 </form>
+                
             </div>
         </div>
     </div>
@@ -318,5 +320,53 @@
             });
         });
     </script>
+
+    {{-- script para cancelar el registro  --}}    
+    <script>
+        function confirmarCancelar() {
+            Swal.fire({
+                title: '¿Estás seguro?',
+                text: '¿Quieres cancelar el registro?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Sí, cancelar',
+                cancelButtonText: 'No, mantener'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Resetear todos los campos del formulario
+                    const form = document.getElementById('miFormulario');
+                    
+                    // Limpiar todos los inputs de texto, correo, teléfono, etc.
+                    form.querySelectorAll('input[type="text"], input[type="email"], input[type="number"], textarea').forEach(input => {
+                        input.value = '';
+                    });
+    
+                    // Limpiar campos de radio (Carrera)
+                    form.querySelectorAll('input[type="radio"]').forEach(radio => {
+                        radio.checked = false;
+                    });
+    
+                    // Limpiar dropdown (Carrera)
+                    const selectDropdown = form.querySelectorAll('select');
+                    selectDropdown.forEach(select => {
+                        select.selectedIndex = -1;  // Resetea la selección
+                    });
+    
+                    // Si usas Select2 o alguna librería similar
+                    if (window.$) {
+                        $('.select2').val(null).trigger('change');
+                    }
+    
+                    Swal.fire(
+                        'Cancelado!',
+                        'El registro ha sido cancelado.',
+                        'success'
+                    );
+                }
+            });
+        }
+    </script>
+    
+
 
 </x-app-layout>
