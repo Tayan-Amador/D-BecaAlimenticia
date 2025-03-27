@@ -1,10 +1,5 @@
 <x-app-layout>
     <div class="flex min-h-screen bg-gray-100">
-        <!-- Menú Lateral -->
-        <aside class="flex min-h-screen">
-            @include('components.menu-lateral')
-        </aside>
-
         <!-- Contenido Principal -->
         <div class="flex-1 flex flex-col">
             <!-- Encabezado -->
@@ -35,7 +30,5 @@
             </main>
         </div>
     </div>
-
-    @include('layouts.footer')
     
 </x-app-layout>

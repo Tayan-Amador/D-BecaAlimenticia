@@ -6,7 +6,7 @@
 </head>
 
 <body class="bg-orange-100">
-    <aside class="w-64 bg-orange-900 text-white  p-4">
+    <aside class="w-64 bg-orange-900 text-white p-4">
         <h1 class="text-3xl font-bold text-center pb-4">Beca Alimenticia</h1>
         <nav class="mt-5 space-y-4">
             <!-- Inicio -->
@@ -18,23 +18,23 @@
             <!-- Gestión de Alumnos -->
             <div>
                 <button
-                    class="w-full flex items-center justify-between px-4 py-2.5 text-sm font-medium rounded-lg text-orange-300 hover:bg-orange-700"
-                    aria-expanded="false" aria-controls="alumnos-dropdown">
+                    class="dropdown-btn w-full flex items-center justify-between px-4 py-2.5 text-sm font-medium rounded-lg text-white hover:bg-orange-700"
+                    data-target="alumnos-dropdown">
                     <span>🎓 Alumnos</span>
-                    <svg class="h-5 w-5 transition-transform" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
-                        fill="currentColor">
+                    <svg class="dropdown-icon h-5 w-5 transition-transform transform" xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 20 20" fill="currentColor">
                         <path fill-rule="evenodd"
                             d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
                             clip-rule="evenodd" />
                     </svg>
                 </button>
-                <div class="hidden space-y-1 pl-11" id="alumnos-dropdown">
+                <div class="dropdown-menu hidden space-y-1 pl-11" id="alumnos-dropdown">
                     <a href="{{ route('alumnos.registro') }}"
-                        class="block px-4 py-2 text-sm text-orange-300 rounded-md hover:bg-orange-700">
+                        class="block px-4 py-2 text-sm text-white rounded-md hover:bg-orange-700">
                         Registrar Alumno
                     </a>
                     <a href="{{ route('alumnos.listado') }}"
-                        class="block px-4 py-2 text-sm text-orange-300 rounded-md hover:bg-orange-700">
+                        class="block px-4 py-2 text-sm text-white rounded-md hover:bg-orange-700">
                         Listado de Alumnos
                     </a>
                 </div>
@@ -43,23 +43,23 @@
             <!-- Reportes -->
             <div>
                 <button
-                    class="w-full flex items-center justify-between px-4 py-2.5 text-sm font-medium rounded-lg text-orange-300 hover:bg-orange-700"
-                    aria-expanded="false" aria-controls="reportes-dropdown">
+                    class="dropdown-btn w-full flex items-center justify-between px-4 py-2.5 text-sm font-medium rounded-lg text-white hover:bg-orange-700"
+                    data-target="reportes-dropdown">
                     <span>📊 Reportes</span>
-                    <svg class="h-5 w-5 transition-transform" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
-                        fill="currentColor">
+                    <svg class="dropdown-icon h-5 w-5 transition-transform transform" xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 20 20" fill="currentColor">
                         <path fill-rule="evenodd"
                             d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
                             clip-rule="evenodd" />
                     </svg>
                 </button>
-                <div class="hidden space-y-1 pl-11" id="reportes-dropdown">
+                <div class="dropdown-menu hidden space-y-1 pl-11" id="reportes-dropdown">
                     <a href="{{ route('reportes.alumnos') }}"
-                        class="block px-4 py-2 text-sm text-orange-300 rounded-md hover:bg-orange-700">
+                        class="block px-4 py-2 text-sm text-white rounded-md hover:bg-orange-700">
                         Reporte de Alumnos
                     </a>
                     <a href="{{ route('reportes.comidas') }}"
-                        class="block px-4 py-2 text-sm text-orange-300 rounded-md hover:bg-orange-700">
+                        class="block px-4 py-2 text-sm text-white rounded-md hover:bg-orange-700">
                         Comidas Entregadas
                     </a>
                 </div>
@@ -67,18 +67,6 @@
         </nav>
     </aside>
 
-    <script>
-        document.querySelectorAll('button[aria-controls]').forEach(button => {
-            button.addEventListener('click', () => {
-                const dropdown = document.getElementById(button.getAttribute('aria-controls'));
-                const isExpanded = button.getAttribute('aria-expanded') === 'true';
-
-                button.setAttribute('aria-expanded', !isExpanded);
-                dropdown.classList.toggle('hidden');
-                button.querySelector('svg').classList.toggle('rotate-180');
-            });
-        });
-    </script>
 </body>
 
 </html>

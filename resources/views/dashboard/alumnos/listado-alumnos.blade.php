@@ -3,11 +3,6 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
 
     <div class="flex min-h-screen bg-gray-100">
-        <!-- Menú lateral -->
-        <aside class="flex min-h-screen">
-            @include('components.menu-lateral')
-        </aside>
-
         <div class="w-full bg-white flex items-center justify-center min-h-full p-2">
             <div class="container max-w-6xl">
                 <div class="bg-gray-300 rounded-xl shadow-md overflow-hidden">
@@ -99,7 +94,7 @@
                                         </td>
                                     </tr>
                                 @endforeach
-                            </tbody>                                                        
+                            </tbody>
                         </table>
                     </div>
                 </div>
@@ -122,8 +117,6 @@
         </script>
 
     </div>
-
-    @include('layouts.footer')
 
     <script>
         const filterSelect = document.getElementById('statusFilter');

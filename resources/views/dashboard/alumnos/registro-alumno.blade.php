@@ -2,10 +2,6 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <div class="flex min-h-screen">
-        <!-- Menú lateral -->
-        <aside class="flex min-h-screen">
-            @include('components.menu-lateral')
-        </aside>
 
         <!-- Contenido principal -->
         <div class="flex-1 flex items-center w-full p-4">
@@ -216,8 +212,6 @@
             </div>
         </div>
     </div>
-
-    @include('layouts.footer')
 
     {{-- Alerta de registro --}}
     <script>
