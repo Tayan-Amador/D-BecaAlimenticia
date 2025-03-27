@@ -1,14 +1,15 @@
 <x-app-layout>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
 
     <div class="flex min-h-screen bg-gray-100">
         <!-- Menú lateral -->
-        <aside class="hidden md:flex min-h-screen">
+        <aside class="flex min-h-screen">
             @include('components.menu-lateral')
         </aside>
 
         <div class="w-full bg-white flex items-center justify-center min-h-full p-2">
-            <div class="container max-w-6xl md:mt-[-100px]">
+            <div class="container max-w-6xl">
                 <div class="bg-gray-300 rounded-xl shadow-md overflow-hidden">
                     <!-- Table Header -->
                     <div class="p-6 border-b border-gray-200">
@@ -50,7 +51,7 @@
                     </div>
 
                     <!-- Table -->
-                    <div class="overflow-x-auto">
+                    <div class="overflow-x-auto max-h-[500px] sm:max-h-[500px] lg:max-h-[500px]">
                         <table id="tabla" class="min-w-full divide-y divide-gray-200">
                             <thead class="bg-gray-50">
                                 <tr>
@@ -84,14 +85,21 @@
                                                 {{ ucfirst($alumno->estatus) }}
                                             </span>
                                         </td>
-                                        <td class="px-6 py-4 text-right">
-                                            <a href="#"
-                                                class="text-indigo-600 hover:text-indigo-900 mr-3">Editar</a>
-                                            <a href="#" class="text-red-600 hover:text-red-900">Eliminar</a>
+                                        <td class="px-6 py-4 text-right space-x-4">
+                                            <!-- Botones de acciones con iconos -->
+                                            <a href="#" class="text-indigo-600 hover:text-indigo-900">
+                                                <i class="fas fa-edit"></i>
+                                            </a>
+                                            <a href="#" class="text-red-600 hover:text-red-900">
+                                                <i class="fas fa-trash-alt"></i>
+                                            </a>
+                                            <a href="#" class="text-yellow-600 hover:text-yellow-500">
+                                                <i class="fas fa-exchange-alt"></i>
+                                            </a>
                                         </td>
                                     </tr>
                                 @endforeach
-                            </tbody>
+                            </tbody>                                                        
                         </table>
                     </div>
                 </div>
@@ -112,14 +120,35 @@
                 });
             });
         </script>
+
     </div>
+
+    @include('layouts.footer')
+
+    <script>
+        const filterSelect = document.getElementById('statusFilter');
+        filterSelect.addEventListener('change', function() {
+            const status = this.value;
+            const rows = document.querySelectorAll('#alumnosTable tr');
+            rows.forEach(row => {
+                if (!status || row.dataset.status === status) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        });
+    </script>
 
     <style>
         @media (max-width: 600px) {
-            #tabla th, #tabla td {
-                padding: 0.2rem;
-                font-size: 0.5rem;
+
+            #tabla th,
+            #tabla td {
+                padding: 0.5rem;
+                font-size: 0.75rem;
             }
         }
     </style>
+
 </x-app-layout>
