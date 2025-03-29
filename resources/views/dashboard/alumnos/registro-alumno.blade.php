@@ -6,51 +6,77 @@
         <!-- Contenido principal -->
         <div class="flex-1 flex items-center w-full justify-center mx-auto p-4 min-h-screen">
             <div class="bg-white shadow-xl rounded-xl p-4 sm:p-10 w-full sm:w-[80%] items-center">
-                <h2 class="text-xl sm:text-4xl md:text-5xl lg:text-6xl font-poppins text-gray-900 text-center mb-4 font-bold">Registro de Alumnos</h2>
+                <h2
+                    class="text-xl sm:text-4xl md:text-5xl lg:text-6xl font-poppins text-gray-900 text-center mb-4 font-bold">
+                    Registro de Alumnos</h2>
 
-                <!-- Formulario -->
-                <form id="miFormulario" action="{{ route('alumnos.registrar') }} " method="POST" class="space-y-6 w-full max-w-4xl mx-auto p-4">
+                <form id="miFormulario"
+                    action="{{ $alumno ? route('alumnos.actualizar', $alumno->id) : route('alumnos.registrar') }}"
+                    method="POST" class="space-y-6 w-full max-w-4xl mx-auto p-4 {{ $alumno ? 'editar' : 'registro' }}">
                     @csrf
+                    @if ($alumno)
+                        @method('PUT') <!-- Si estamos editando, usamos PUT -->
+                    @endif
 
+                    <!-- Expediente -->
                     <div class="relative">
-                        <label for="expediente" class="text-gray-800 font-medium text-lg block mb-2 sm:text-base md:text-lg lg:text-xl break-words">Expediente</label>
+                        <label for="expediente"
+                            class="text-gray-800 font-medium text-lg block mb-2 sm:text-base md:text-lg lg:text-xl break-words">Expediente</label>
                         <input type="text" name="expediente" id="expediente" required
-                            class="w-full px-4 py-3 text-md border rounded-lg focus:ring-3 focus:ring-indigo-500 focus:outline-none mt-1">
+                            class="w-full px-4 py-3 text-md border rounded-lg focus:ring-3 focus:ring-indigo-500 focus:outline-none mt-1"
+                            value="{{ old('expediente', $alumno->expediente ?? '') }}">
                     </div>
 
+                    <!-- Nombre -->
                     <div class="relative">
-                        <label for="nombre" class="text-gray-800 font-medium text-lg block mb-2 sm:text-base md:text-lg lg:text-xl break-words">Nombre completo</label>
+                        <label for="nombre"
+                            class="text-gray-800 font-medium text-lg block mb-2 sm:text-base md:text-lg lg:text-xl break-words">Nombre
+                            completo</label>
                         <input type="text" name="nombre" id="nombre" required
-                            class="w-full px-4 py-3 text-md border rounded-lg focus:ring-3 focus:ring-indigo-500 focus:outline-none mt-1">
+                            class="w-full px-4 py-3 text-md border rounded-lg focus:ring-3 focus:ring-indigo-500 focus:outline-none mt-1"
+                            value="{{ old('nombre', $alumno->nombre ?? '') }}">
                     </div>
 
+                    <!-- Correo -->
                     <div class="relative">
-                        <label for="correo" class="text-gray-800 font-medium text-lg block mb-2 sm:text-base md:text-lg lg:text-xl break-words">Correo electrónico</label>
-                        <input type="email" name="correo" id="correo" required class="w-full px-4 py-3 text-md border rounded-lg focus:ring-3 focus:ring-indigo-500 focus:outline-none mt-1">
+                        <label for="correo"
+                            class="text-gray-800 font-medium text-lg block mb-2 sm:text-base md:text-lg lg:text-xl break-words">Correo
+                            electrónico</label>
+                        <input type="email" name="correo" id="correo" required
+                            class="w-full px-4 py-3 text-md border rounded-lg focus:ring-3 focus:ring-indigo-500 focus:outline-none mt-1"
+                            value="{{ old('correo', $alumno->correo ?? '') }}">
                     </div>
 
+                    <!-- Teléfono -->
                     <div class="relative">
-                        <label for="telefono" class="text-gray-800 font-medium text-lg block mb-2 sm:text-base md:text-lg lg:text-xl break-words">Número de teléfono</label>
+                        <label for="telefono"
+                            class="text-gray-800 font-medium text-lg block mb-2 sm:text-base md:text-lg lg:text-xl break-words">Número
+                            de teléfono</label>
                         <input type="text" name="telefono" id="telefono" required
                             class="w-full px-4 py-3 text-md border rounded-lg focus:ring-3 focus:ring-indigo-500 focus:outline-none mt-1"
+                            value="{{ old('telefono', $alumno->telefono ?? '') }}"
                             oninput="validarNumerico(this, 'error-telefono')">
-                        <span id="error-telefono" class="text-red-500 text-sm hidden">Por favor, ingresa solo números válidos.</span>
+                        <span id="error-telefono" class="text-red-500 text-sm hidden">Por favor, ingresa solo números
+                            válidos.</span>
                     </div>
 
+                    <!-- Carrera -->
                     <div class="relative" id="carrera">
                         <button id="dropdownSearchButton" data-dropdown-toggle="dropdownSearch"
                             class="w-full flex justify-between items-center px-4 py-2 text-sm font-medium text-white bg-orange-500 rounded-lg hover:bg-orange-600 focus:ring-4 focus:outline-none focus:ring-orange-300"
-                            type="button">Carreras<svg class="w-2.5 h-2.5  ms-2.5" aria-hidden="true"
-                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                            type="button">Carreras
+                            <svg class="w-2.5 h-2.5 ms-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                fill="none" viewBox="0 0 10 6">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                                     stroke-width="2" d="m1 1 4 4 4-4" />
-                            </svg></button>
+                            </svg>
+                        </button>
 
                         <!-- Dropdown menu -->
                         <div id="dropdownSearch"
                             class="absolute bottom-full left-0 z-10 hidden bg-white rounded-lg shadow-md w-full">
                             <div class="p-3">
-                                <label for="input-group-search" class="sr-only">Search</label>
+                                <label for="input-group-search" class="sr-only">Buscar</label>
                                 <div class="relative">
                                     <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
                                         <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
@@ -60,157 +86,198 @@
                                         </svg>
                                     </div>
                                     <input type="text" id="input-group-search"
-                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5"
                                         placeholder="Buscar carreras">
                                 </div>
                             </div>
 
                             <ul class="max-h-48 overflow-y-auto px-3 pb-3 text-sm text-gray-700 dark:text-gray-200"
                                 aria-labelledby="dropdownSearchButton">
+                                <!-- Opciones de carrera -->
                                 <li>
                                     <div
                                         class="flex items-center p-2 rounded-sm hover:bg-gray-100 dark:hover:bg-gray-600">
                                         <input id="checkbox-administracion" type="radio" name="carrera"
                                             value="Administracion"
-                                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
+                                            {{ old('carrera', $alumno->carrera ?? '') == 'Administracion' ? 'checked' : '' }}>
                                         <label for="checkbox-administracion"
-                                            class="w-full ms-2 text-sm font-medium text-gray-900 rounded-sm dark:text-gray-300">Lic.
-                                            Administración</label>
+                                            class="w-full ms-2 text-sm font-medium text-gray-900 rounded-sm dark:text-gray-300">
+                                            Lic. Administración
+                                        </label>
                                     </div>
                                 </li>
+
                                 <li>
                                     <div
                                         class="flex items-center p-2 rounded-sm hover:bg-gray-100 dark:hover:bg-gray-600">
                                         <input id="checkbox-comercio" type="radio" name="carrera" value="Comercio"
-                                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
+                                            {{ old('carrera', $alumno->carrera ?? '') == 'Comercio' ? 'checked' : '' }}>
                                         <label for="checkbox-comercio"
-                                            class="w-full ms-2 text-sm font-medium text-gray-900 rounded-sm dark:text-gray-300">Lic.
-                                            Comercio</label>
+                                            class="w-full ms-2 text-sm font-medium text-gray-900 rounded-sm dark:text-gray-300">
+                                            Lic. Comercio
+                                        </label>
                                     </div>
                                 </li>
+
                                 <li>
                                     <div
                                         class="flex items-center p-2 rounded-sm hover:bg-gray-100 dark:hover:bg-gray-600">
                                         <input id="checkbox-nutricion" type="radio" name="carrera" value="Nutricion"
-                                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
+                                            {{ old('carrera', $alumno->carrera ?? '') == 'Nutricion' ? 'checked' : '' }}>
                                         <label for="checkbox-nutricion"
-                                            class="w-full ms-2 text-sm font-medium text-gray-900 rounded-sm dark:text-gray-300">Lic.
-                                            Nutrición</label>
+                                            class="w-full ms-2 text-sm font-medium text-gray-900 rounded-sm dark:text-gray-300">
+                                            Lic. Nutrición
+                                        </label>
                                     </div>
                                 </li>
+
                                 <li>
                                     <div
                                         class="flex items-center p-2 rounded-sm hover:bg-gray-100 dark:hover:bg-gray-600">
                                         <input id="checkbox-criminologia" type="radio" name="carrera"
                                             value="Criminologia"
-                                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
+                                            {{ old('carrera', $alumno->carrera ?? '') == 'Criminologia' ? 'checked' : '' }}>
                                         <label for="checkbox-criminologia"
-                                            class="w-full ms-2 text-sm font-medium text-gray-900 rounded-sm dark:text-gray-300">Lic.
-                                            Criminología</label>
+                                            class="w-full ms-2 text-sm font-medium text-gray-900 rounded-sm dark:text-gray-300">
+                                            Lic. Criminología
+                                        </label>
                                     </div>
                                 </li>
+
                                 <li>
                                     <div
                                         class="flex items-center p-2 rounded-sm hover:bg-gray-100 dark:hover:bg-gray-600">
                                         <input id="checkbox-enfermeria" type="radio" name="carrera"
                                             value="Enfermeria"
-                                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
+                                            {{ old('carrera', $alumno->carrera ?? '') == 'Enfermeria' ? 'checked' : '' }}>
                                         <label for="checkbox-enfermeria"
-                                            class="w-full ms-2 text-sm font-medium text-gray-900 rounded-sm dark:text-gray-300">Lic.
-                                            Enfermería</label>
+                                            class="w-full ms-2 text-sm font-medium text-gray-900 rounded-sm dark:text-gray-300">
+                                            Lic. Enfermería
+                                        </label>
                                     </div>
                                 </li>
+
                                 <li>
                                     <div
                                         class="flex items-center p-2 rounded-sm hover:bg-gray-100 dark:hover:bg-gray-600">
                                         <input id="checkbox-ingles" type="radio" name="carrera"
                                             value="Enseñanza Ingles"
-                                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
+                                            {{ old('carrera', $alumno->carrera ?? '') == 'Enseñanza Ingles' ? 'checked' : '' }}>
                                         <label for="checkbox-ingles"
-                                            class="w-full ms-2 text-sm font-medium text-gray-900 rounded-sm dark:text-gray-300">Lic.
-                                            Enseñanza del Inglés</label>
+                                            class="w-full ms-2 text-sm font-medium text-gray-900 rounded-sm dark:text-gray-300">
+                                            Lic. Enseñanza del Inglés
+                                        </label>
                                     </div>
                                 </li>
+
                                 <li>
                                     <div
                                         class="flex items-center p-2 rounded-sm hover:bg-gray-100 dark:hover:bg-gray-600">
                                         <input id="checkbox-fisioterapia" type="radio" name="carrera"
                                             value="Fisioterapia"
-                                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
+                                            {{ old('carrera', $alumno->carrera ?? '') == 'Fisioterapia' ? 'checked' : '' }}>
                                         <label for="checkbox-fisioterapia"
-                                            class="w-full ms-2 text-sm font-medium text-gray-900 rounded-sm dark:text-gray-300">Lic.
-                                            Fisioterapia</label>
+                                            class="w-full ms-2 text-sm font-medium text-gray-900 rounded-sm dark:text-gray-300">
+                                            Lic. Fisioterapia
+                                        </label>
                                     </div>
                                 </li>
+
                                 <li>
                                     <div
                                         class="flex items-center p-2 rounded-sm hover:bg-gray-100 dark:hover:bg-gray-600">
                                         <input id="checkbox-entrenamiento" type="radio" name="carrera"
                                             value="Entrenamiento Deportivo"
-                                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
+                                            {{ old('carrera', $alumno->carrera ?? '') == 'Entrenamiento Deportivo' ? 'checked' : '' }}>
                                         <label for="checkbox-entrenamiento"
-                                            class="w-full ms-2 text-sm font-medium text-gray-900 rounded-sm dark:text-gray-300">Lic.
-                                            Entrenamiento Deportivo</label>
+                                            class="w-full ms-2 text-sm font-medium text-gray-900 rounded-sm dark:text-gray-300">
+                                            Lic. Entrenamiento Deportivo
+                                        </label>
                                     </div>
                                 </li>
+
                                 <li>
                                     <div
                                         class="flex items-center p-2 rounded-sm hover:bg-gray-100 dark:hover:bg-gray-600">
                                         <input id="checkbox-geociencias" type="radio" name="carrera"
                                             value="Geociencias"
-                                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
+                                            {{ old('carrera', $alumno->carrera ?? '') == 'Geociencias' ? 'checked' : '' }}>
                                         <label for="checkbox-geociencias"
-                                            class="w-full ms-2 text-sm font-medium text-gray-900 rounded-sm dark:text-gray-300">Ing.
-                                            Geociencias</label>
+                                            class="w-full ms-2 text-sm font-medium text-gray-900 rounded-sm dark:text-gray-300">
+                                            Ing. Geociencias
+                                        </label>
                                     </div>
                                 </li>
+
                                 <li>
                                     <div
                                         class="flex items-center p-2 rounded-sm hover:bg-gray-100 dark:hover:bg-gray-600">
                                         <input id="checkbox-industrial" type="radio" name="carrera"
                                             value="Industrial"
-                                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
+                                            {{ old('carrera', $alumno->carrera ?? '') == 'Industrial' ? 'checked' : '' }}>
                                         <label for="checkbox-industrial"
-                                            class="w-full ms-2 text-sm font-medium text-gray-900 rounded-sm dark:text-gray-300">Ing.
-                                            Industrial</label>
+                                            class="w-full ms-2 text-sm font-medium text-gray-900 rounded-sm dark:text-gray-300">
+                                            Ing. Industrial
+                                        </label>
                                     </div>
                                 </li>
+
                                 <li>
                                     <div
                                         class="flex items-center p-2 rounded-sm hover:bg-gray-100 dark:hover:bg-gray-600">
                                         <input id="checkbox-software" type="radio" name="carrera" value="Software"
-                                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
+                                            {{ old('carrera', $alumno->carrera ?? '') == 'Software' ? 'checked' : '' }}>
                                         <label for="checkbox-software"
-                                            class="w-full ms-2 text-sm font-medium text-gray-900 rounded-sm dark:text-gray-300">Ing.
-                                            Software</label>
+                                            class="w-full ms-2 text-sm font-medium text-gray-900 rounded-sm dark:text-gray-300">
+                                            Ing. Software
+                                        </label>
                                     </div>
                                 </li>
+
                                 <li>
                                     <div
                                         class="flex items-center p-2 rounded-sm hover:bg-gray-100 dark:hover:bg-gray-600">
                                         <input id="checkbox-horticultura" type="radio" name="carrera"
                                             value="Horticultura"
-                                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
+                                            {{ old('carrera', $alumno->carrera ?? '') == 'Horticultura' ? 'checked' : '' }}>
                                         <label for="checkbox-horticultura"
-                                            class="w-full ms-2 text-sm font-medium text-gray-900 rounded-sm dark:text-gray-300">Ing.
-                                            Horticultura</label>
+                                            class="w-full ms-2 text-sm font-medium text-gray-900 rounded-sm dark:text-gray-300">
+                                            Ing. Horticultura
+                                        </label>
                                     </div>
                                 </li>
                             </ul>
+
                         </div>
                     </div>
 
+                    <!-- Botones -->
                     <div class="flex gap-4 flex-col sm:flex-row w-full">
-                        <button type="submit" class="flex-1 sm:w-auto bg-[#800020] text-white font-bold text-lg py-3 rounded-lg hover:bg-red-800 transition shadow-md">
-                            Guardar
+                        <button type="submit"
+                            class="flex-1 sm:w-auto bg-[#800020] text-white font-bold text-lg py-3 rounded-lg hover:bg-red-800 transition shadow-md">
+                            {{ $alumno ? 'Actualizar' : 'Registrar' }}
                         </button>
-                        <button type="button" onclick="confirmarCancelar()" class="flex-1 sm:w-auto bg-gray-500 text-white font-bold text-lg py-3 rounded-lg hover:bg-gray-600 transition shadow-md">
+
+                        <button type="button" onclick="confirmarCancelar()"
+                            class="flex-1 sm:w-auto bg-gray-500 text-white font-bold text-lg py-3 rounded-lg hover:bg-gray-600 transition shadow-md">
                             Cancelar
                         </button>
+
                     </div>
-                    
                 </form>
-                
+
             </div>
         </div>
     </div>
@@ -321,52 +388,60 @@
         });
     </script>
 
-    {{-- script para cancelar el registro  --}}    
+    {{-- script general que determine si estamos en el registro o en la edición --}}
     <script>
         function confirmarCancelar() {
             Swal.fire({
                 title: '¿Estás seguro?',
-                text: '¿Quieres cancelar el registro?',
+                text: '¿Quieres cancelar?',
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonText: 'Sí, cancelar',
                 cancelButtonText: 'No, mantener'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    // Resetear todos los campos del formulario
+                    // Obtener el formulario
                     const form = document.getElementById('miFormulario');
-                    
-                    // Limpiar todos los inputs de texto, correo, teléfono, etc.
-                    form.querySelectorAll('input[type="text"], input[type="email"], input[type="number"], textarea').forEach(input => {
-                        input.value = '';
-                    });
-    
+
+                    // Limpiar todos los campos de texto, correo, teléfono, etc.
+                    form.querySelectorAll('input[type="text"], input[type="email"], input[type="number"], textarea')
+                        .forEach(input => {
+                            input.value = '';
+                        });
+
                     // Limpiar campos de radio (Carrera)
                     form.querySelectorAll('input[type="radio"]').forEach(radio => {
                         radio.checked = false;
                     });
-    
+
                     // Limpiar dropdown (Carrera)
                     const selectDropdown = form.querySelectorAll('select');
                     selectDropdown.forEach(select => {
-                        select.selectedIndex = -1;  // Resetea la selección
+                        select.selectedIndex = -1; // Resetea la selección
                     });
-    
+
                     // Si usas Select2 o alguna librería similar
                     if (window.$) {
                         $('.select2').val(null).trigger('change');
                     }
-    
+
+                    // Redirigir dependiendo de si estamos en la vista de edición o registro
+                    if (form.classList.contains('editar')) {
+                        window.location.href =
+                        "{{ route('alumnos.listado') }}"; // Redirigir a listado de alumnos (Edición)
+                    } else {
+                        window.location.href =
+                        "{{ route('alumnos.registro') }}"; // Redirigir a registro (Creación)
+                    }
+
                     Swal.fire(
                         'Cancelado!',
-                        'El registro ha sido cancelado.',
+                        'La operación ha sido cancelada.',
                         'success'
                     );
                 }
             });
         }
     </script>
-    
-
 
 </x-app-layout>

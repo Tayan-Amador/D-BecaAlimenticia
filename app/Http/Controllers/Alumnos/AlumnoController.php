@@ -20,9 +20,10 @@ class AlumnoController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create($id = null)
     {
-        return view('dashboard.alumnos.registro-alumno');
+        $alumno = $id ? Alumno::findOrFail($id) : null;
+        return view('dashboard.alumnos.registro-alumno', compact('alumno'));
     }
 
     /**
@@ -30,11 +31,10 @@ class AlumnoController extends Controller
      */
     public function store(Request $request)
     {
-        
         $request->validate([
-            'expediente' => 'required',
+            'expediente' => 'required|unique:alumnos,expediente', // Asegura que el expediente sea único
             'nombre' => 'required',
-            'correo' => 'required',
+            'correo' => 'required|email', // Valida que sea un correo electrónico
             'telefono' => 'required',
             'carrera' => 'required',
         ]);
@@ -55,7 +55,7 @@ class AlumnoController extends Controller
      */
     public function show(string $id)
     {
-        //
+        // Este método no está implementado, si lo necesitas puedes agregarlo
     }
 
     /**
@@ -63,7 +63,8 @@ class AlumnoController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $alumno = Alumno::findOrFail($id);
+        return view('alumnos.editar', compact('alumno')); // Vista para editar
     }
 
     /**
@@ -71,7 +72,18 @@ class AlumnoController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'expediente' => 'required|unique:alumnos,expediente,' . $id, // Asegura que el expediente sea único, excepto para el alumno actual
+            'nombre' => 'required',
+            'correo' => 'required|email',
+            'telefono' => 'required',
+            'carrera' => 'required',
+        ]);
+
+        $alumno = Alumno::findOrFail($id);
+        $alumno->update($request->all());
+
+        return redirect()->route('alumnos.listado')->with('success', 'Alumno actualizado con éxito');
     }
 
     /**
@@ -79,6 +91,18 @@ class AlumnoController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $alumno = Alumno::findOrFail($id);
+        $alumno->delete();
+
+        return redirect()->route('alumnos.listado')->with('success', 'Alumno eliminado con éxito');
+    }
+
+    public function toggleStatus($id)
+    {
+        $alumno = Alumno::find($id);
+        $alumno->status = ($alumno->status == 'activo') ? 'inactivo' : 'activo';
+        $alumno->save();
+
+        return redirect()->route('alumnos.listado')->with('success', 'Estado del alumno actualizado');
     }
 }

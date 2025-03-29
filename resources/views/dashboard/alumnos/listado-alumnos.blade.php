@@ -3,10 +3,10 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
 
     <div class="flex min-h-screen bg-gray-100">
+
         <div class="w-full bg-white flex items-center justify-center min-h-full p-2">
             <div class="container max-w-6xl">
                 <div class="bg-gray-300 rounded-xl shadow-md overflow-hidden">
-                    <!-- Table Header -->
                     <div class="p-6 border-b border-gray-200">
                         <div class="flex flex-col md:flex-row md:items-center md:justify-between">
                             <div>
@@ -15,7 +15,7 @@
                             </div>
                             <div class="mt-4 md:mt-0">
                                 <button
-                                    class="bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-4 rounded-lg transition duration-150 ease-in-out">Imprimir
+                                    class="bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-4 rounded-lg">Imprimir
                                     Reporte</button>
                             </div>
                         </div>
@@ -35,7 +35,8 @@
                                 </div>
                             </div>
                             <div>
-                                <select class="border border-gray-300 rounded-lg px-4 py-2 w-full sm:w-auto"
+                                <select
+                                    class="border border-gray-300 rounded-lg px-3 py-2 w-auto max-w-[150px] sm:max-w-none focus:outline-none focus:ring-2 focus:ring-indigo-500 appearance-none bg-white pr-8 text-sm sm:text-base"
                                     id="statusFilter">
                                     <option value="">Todos</option>
                                     <option value="activo">Activo</option>
@@ -45,77 +46,72 @@
                         </div>
                     </div>
 
-                    <!-- Table -->
-                    <div class="overflow-x-auto max-h-[500px] sm:max-h-[500px] lg:max-h-[500px]">
+                    <!-- Responsive Table -->
+                    <div class="overflow-x-auto">
                         <table id="tabla" class="min-w-full divide-y divide-gray-200">
                             <thead class="bg-gray-50">
                                 <tr>
-                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
-                                        Expediente</th>
-                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Nombre
-                                    </th>
-                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Correo
-                                    </th>
-                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Carrera
-                                    </th>
-                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Teléfono
-                                    </th>
-                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Estatus
-                                    </th>
-                                    <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase">
-                                        Acciones</th>
+                                    <th class="px-2 py-2 text-center text-sm font-medium text-gray-500">Expediente</th>
+                                    <th class="px-2 py-2 text-center text-sm font-medium text-gray-500">Nombre</th>
+                                    <th class="px-2 py-2 text-center text-sm font-medium text-gray-500">Correo</th>
+                                    <th class="px-2 py-2 text-center text-sm font-medium text-gray-500">Carrera</th>
+                                    <th class="px-2 py-2 text-center text-sm font-medium text-gray-500">Teléfono</th>
+                                    <th class="px-2 py-2 text-center text-sm font-medium text-gray-500">Estatus</th>
+                                    <th class="px-2 py-2 text-center text-sm font-medium text-gray-500">Acciones</th>
                                 </tr>
                             </thead>
+
                             <tbody id="alumnosTable" class="bg-white divide-y divide-gray-200">
-                                @foreach ($alumnos as $alumno)
-                                    <tr class="hover:bg-gray-50" data-status="{{ $alumno->estatus }}">
-                                        <td class="px-6 py-4">{{ $alumno->expediente }}</td>
-                                        <td class="px-6 py-4">{{ $alumno->nombre }}</td>
-                                        <td class="px-6 py-4">{{ $alumno->correo }}</td>
-                                        <td class="px-6 py-4">{{ $alumno->carrera }}</td>
-                                        <td class="px-6 py-4">{{ $alumno->telefono }}</td>
-                                        <td class="px-6 py-4">
-                                            <span
-                                                class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full {{ $alumno->estatus == 'activo' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' }}">
-                                                {{ ucfirst($alumno->estatus) }}
-                                            </span>
+                                @forelse ($alumnos as $alumno)
+                                    <tr class="hover:bg-gray-50" data-status="{{ $alumno->status }}">
+                                        <td class="px-2 text-center py-4">{{ $alumno->expediente }}</td>
+                                        <td class="px-2 text-center py-4">{{ $alumno->nombre }}</td>
+                                        <td class="px-2 text-center py-4 whitespace-nowrap overflow-hidden text-ellipsis max-w-[150px] sm:max-w-[250px]">
+                                            {{ $alumno->correo }}
                                         </td>
-                                        <td class="px-6 py-4 text-right space-x-4">
-                                            <!-- Botones de acciones con iconos -->
-                                            <a href="#" class="text-indigo-600 hover:text-indigo-900">
+                                        <td class="px-2 text-center py-4">{{ $alumno->carrera }}</td>
+                                        <td class="px-2 text-center py-4">{{ $alumno->telefono }}</td>
+                                        
+                                        <td class="px-2 text-center py-4">
+                                            <!-- Enlace para cambiar el estado -->
+                                            <a href="{{ route('alumnos.cambiarStatus', $alumno->id) }}"
+                                                class="{{ $alumno->status == 'activo' ? 'text-green-600 hover:text-green-900' : 'text-gray-600 hover:text-gray-900' }}">
+                                                <i class="fas fa-toggle-on"></i>
+                                                {{ $alumno->status == 'activo' ? 'Activo' : 'Inactivo' }}
+                                            </a>
+                                        </td>
+                                        
+                                        <td class="px-2 py-4 text-center space-x-4">
+                                            <!-- Enlace de editar -->
+                                            <a href="{{ route('alumnos.registro', $alumno->id) }}"
+                                                class="text-indigo-600 hover:text-indigo-900">
                                                 <i class="fas fa-edit"></i>
                                             </a>
-                                            <a href="#" class="text-red-600 hover:text-red-900">
-                                                <i class="fas fa-trash-alt"></i>
-                                            </a>
-                                            <a href="#" class="text-yellow-600 hover:text-yellow-500">
-                                                <i class="fas fa-exchange-alt"></i>
-                                            </a>
+
+                                            <!-- Formulario de eliminar -->
+                                            <form action="{{ route('alumnos.eliminar', $alumno->id) }}" method="POST"
+                                                style="display:inline;">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="text-red-600 hover:text-red-900">
+                                                    <i class="fas fa-trash-alt"></i>
+                                                </button>
+                                            </form>
                                         </td>
                                     </tr>
-                                @endforeach
+                                @empty
+                                    <tr class="hover:bg-gray-50">
+                                        <td colspan="7" class="px-4 py-4 text-center text-gray-500">No hay registros
+                                            disponibles</td>
+                                    </tr>
+                                @endforelse
                             </tbody>
+
                         </table>
                     </div>
                 </div>
             </div>
         </div>
-
-        <script>
-            const filterSelect = document.getElementById('statusFilter');
-            filterSelect.addEventListener('change', function() {
-                const status = this.value;
-                const rows = document.querySelectorAll('#alumnosTable tr');
-                rows.forEach(row => {
-                    if (!status || row.dataset.status === status) {
-                        row.style.display = '';
-                    } else {
-                        row.style.display = 'none';
-                    }
-                });
-            });
-        </script>
-
     </div>
 
     <script>
@@ -133,15 +129,5 @@
         });
     </script>
 
-    <style>
-        @media (max-width: 600px) {
-
-            #tabla th,
-            #tabla td {
-                padding: 0.5rem;
-                font-size: 0.75rem;
-            }
-        }
-    </style>
 
 </x-app-layout>

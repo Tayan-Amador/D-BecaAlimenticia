@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('correo');
             $table->string('carrera');
             $table->string('telefono');
-            $table->string('status')->default('activo');
+            $table->enum('status', ['activo', 'inactivo'])->default('activo'); 
             $table->binary('huella')->nullable();
             $table->timestamps();
         });

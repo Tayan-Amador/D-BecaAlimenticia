@@ -34,11 +34,14 @@ Route::middleware('auth')->group(function () {
 
 // Gestión de Alumnos
 Route::middleware('auth')->prefix('alumnos')->as('alumnos.')->group(function () {
-    Route::get('/vista-registro', [AlumnoController::class, 'create'])->name('registro');
-    Route::get('/listado', [AlumnoController::class, 'index'])->name('listado');
-    Route::post('/registrar', [AlumnoController::class, 'store'])->name('registrar');
-
+    Route::get('/registro/{id?}', [AlumnoController::class, 'create'])->name('registro'); // Maneja tanto la vista para nuevo alumno como para editar
+    Route::get('/listado', [AlumnoController::class, 'index'])->name('listado'); // Listado de alumnos
+    Route::post('/registrar', [AlumnoController::class, 'store'])->name('registrar'); // Registrar alumno
+    Route::put('/actualizar/{id}', [AlumnoController::class, 'update'])->name('actualizar'); // Actualizar alumno
+    Route::delete('/eliminar/{id}', [AlumnoController::class, 'destroy'])->name('eliminar'); // Eliminar alumno
+    Route::get('/cambiar-status/{id}', [AlumnoController::class, 'toggleStatus'])->name('cambiarStatus'); // Cambiar estado del alumno
 });
+
 
 // Gestión de Huellas
 Route::middleware('auth')->prefix('huellas')->as('huellas.')->group(function () {
